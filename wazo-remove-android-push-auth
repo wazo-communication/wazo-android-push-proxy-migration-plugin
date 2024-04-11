@@ -1,0 +1,16 @@
+#!/bin/bash
+# Copyright 2024 The Wazo Authors  (see the AUTHORS file)
+# SPDX-License-Identifier: GPL-3.0+
+
+set -euo pipefail
+
+token=$(wazo-auth-cli token create)
+
+tenants="$(wazo-auth-cli tenant list -f value -c uuid)"
+
+echo "Found $(echo "$tenants" | wc -l) tenants"
+
+for tenant in $tenants ; do
+    echo "Processing tenant $tenant"
+    curl --silent -H "X-Auth-Token: $token" -H "Wazo-Tenant: $tenant" -X DELETE http://localhost:9497/0.1/external/mobile/config | grep -v '"unknown-external-auth"' || true
+done

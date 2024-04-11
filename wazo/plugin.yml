@@ -1,0 +1,12 @@
+name: wazo-android-push-proxy-migration
+namespace: wazocommunication
+version: 1.0.0
+author: Wazo authors
+display_name: Android Push Notification Migration
+min_wazo_version: 23.17
+tags:
+  - mobile
+  - android
+homepage: https://github.com/wazo-communication/wazo-android-push-proxy-migration-plugin
+debian_depends:
+  - moreutils
