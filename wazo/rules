@@ -10,7 +10,7 @@ case "$1" in
 
     package)
         mkdir -p ${pkgdir}/usr/bin
-        cp wazo-remove-android-push-auth ${pkgdir}/usr/bin
+        cp wazo-remove-android-push-auth.py ${pkgdir}/usr/bin
         ;;
 
     install)
