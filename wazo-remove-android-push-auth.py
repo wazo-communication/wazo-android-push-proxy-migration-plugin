@@ -75,9 +75,9 @@ def process_tenant(tenant):
         notification = {
             'notification_type': 'pushNotificationServerMigration',
             'user_uuid': user_uuid,
-            'title': 'Redémarrez l\'application pour continuer à recevoir vos appels',
-            'body': ('Une mise à jour importante de votre application à eu lieu, '
-                     'veuillez redémarrer l\'application pour continuer à recevoir des appels'),
+            'title': 'Please restart the app to continue receiving calls',
+            'body': ('The app received an important update, please restart '
+                     'the app to continue receiving calls'),
         }
         webhookd.mobile_notifications.send(notification)
 
