@@ -14,10 +14,10 @@ case "$1" in
         ;;
 
     install)
-        chmod 0700 /usr/bin/wazo-remove-android-push-auth
+        chmod 0700 /usr/bin/wazo-remove-android-push-auth.py
         touch /var/log/wazo-android-push-proxy-migration.log
         chmod 0600 /var/log/wazo-android-push-proxy-migration.log
-        /usr/bin/wazo-remove-android-push-auth $(wazo-auth-cli token create) | ts '%Y-%m-%d %H:%M:%S' |& tee -a /var/log/wazo-android-push-proxy-migration.log
+        /usr/bin/wazo-remove-android-push-auth.py $(wazo-auth-cli token create) | ts '%Y-%m-%d %H:%M:%S' |& tee -a /var/log/wazo-android-push-proxy-migration.log
         ;;
 
     uninstall)
