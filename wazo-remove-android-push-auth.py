@@ -123,6 +123,3 @@ if not success:
     sys.exit(2)
 
 print('Finished')
-
-# todo: how fast can we send push notifs? about 0.3 sec per notif
-# how much time for 3000 mobile users over 2000 tenants? around 0.1 sec per tenant
