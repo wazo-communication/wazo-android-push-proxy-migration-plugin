@@ -43,11 +43,15 @@ def process_tenant(tenant):
         raise
 
     if not mobile_config.get('fcm_api_key'):
-        print('Tenant has no mobile config key fcm_api_key, migrating mobile config silently')
+        print(
+            'Tenant has no mobile config key fcm_api_key, migrating mobile config silently'
+        )
         auth.external.delete_config('mobile', tenant_uuid=tenant['uuid'])
         return
     if not mobile_config.get('fcm_sender_id'):
-        print('Tenant has no mobile config key fcm_sender_id, migrating mobile config silently')
+        print(
+            'Tenant has no mobile config key fcm_sender_id, migrating mobile config silently'
+        )
         auth.external.delete_config('mobile', tenant_uuid=tenant['uuid'])
         return
 
@@ -66,7 +70,9 @@ def process_tenant(tenant):
     # enable subscription to new server so that client apps can register to the new SenderID
     mobile_config_new_sender_id = dict(mobile_config)
     mobile_config_new_sender_id['fcm_sender_id'] = None
-    auth.external.update_config('mobile', mobile_config_new_sender_id, tenant_uuid=tenant['uuid'])
+    auth.external.update_config(
+        'mobile', mobile_config_new_sender_id, tenant_uuid=tenant['uuid']
+    )
 
     # send notification to migrate client-side subscription
     print(f'Sending alert notification to {len(mobile_user_uuids)} users')
@@ -76,8 +82,10 @@ def process_tenant(tenant):
             'notification_type': 'pushNotificationServerMigration',
             'user_uuid': user_uuid,
             'title': 'Redémarrez l\'application pour continuer à recevoir vos appels',
-            'body': ('Une mise à jour importante de votre application à eu lieu, '
-                     'veuillez redémarrer l\'application pour continuer à recevoir des appels'),
+            'body': (
+                'Une mise à jour importante de votre application à eu lieu, '
+                'veuillez redémarrer l\'application pour continuer à recevoir des appels'
+            ),
         }
         webhookd.mobile_notifications.send(notification)
 
@@ -118,4 +126,3 @@ print('Finished')
 
 # todo: how fast can we send push notifs? about 0.3 sec per notif
 # how much time for 3000 mobile users over 2000 tenants? around 0.1 sec per tenant
-
